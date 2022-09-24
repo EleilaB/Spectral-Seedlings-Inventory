@@ -13,3 +13,11 @@ makeCategory = () => {
 makeProduct = () => {
 
 }
+
+deleteCategory = () => {
+
+}
+
+deleteProduct = () => {
+
+}
