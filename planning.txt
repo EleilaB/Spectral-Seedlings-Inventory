@@ -1,0 +1,6 @@
+The webapp will be called "Spectral Seedlings Inventory", as it's intended to be a base for a larger project I'd like to do for a friend.
+
+The HTML will consist of a title header, a set of lists of products arranged by category, and an editing section for adding and removing categories and products.
+The JS will add functionality to show products when their category is selected, as well as adding the functionality to add and remove categories and products.
+A DB hosted through heroku will hold the categories and products in tables that reference each other.
+The CSS styling should evoke "spooky bag."
