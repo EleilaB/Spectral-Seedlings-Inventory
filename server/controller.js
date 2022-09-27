@@ -9,3 +9,13 @@ const sequelize = new Sequelize(CONNECTION_STRING, {
         }
     }
 });
+
+module.exports = {
+    getProducts: (req, res) => {
+        const {category} = req.body
+        const categoryID = sequelize.query(`SELECT category_id FROM categories WHERE name = ${category};`)
+        sequelize.query(`
+            SELECT * FROM products WHERE category_id = ${categoryID};
+        `).then(dbRes => res.status(200).send(dbRes[0]))
+    }
+}
