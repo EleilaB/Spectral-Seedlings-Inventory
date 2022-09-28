@@ -11,18 +11,18 @@ const sequelize = new Sequelize(CONNECTION_STRING, {
 });
 
 module.exports = {
+    sequelize,
     getProducts: (req, res) => {
-        const {category} = req.body
-        const categoryID = sequelize.query(`SELECT category_id FROM categories WHERE name = ${category};`)
+        const {id} = req.params
         sequelize.query(`
-            SELECT * FROM products WHERE category_id = ${categoryID}
-            ORDER BY name desc;
+            SELECT * FROM products WHERE category_id = ${id}
+            ORDER BY name asc;
         `).then(dbRes => res.status(200).send(dbRes[0]))
     },
     getCategories: (req, res) => {
         sequelize.query(`
             SELECT * FROM categories
-            ORDER BY name desc;
+            ORDER BY name asc;
         `).then(dbRes => res.status(200).send(dbRes[0]))
     },
     addCategory: (req, res) => {

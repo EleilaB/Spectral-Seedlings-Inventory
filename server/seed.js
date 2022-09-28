@@ -35,6 +35,6 @@ module.exports = {
             ('Solo D20', 3, 12.00),
             ('Ghibli Print', 2, 10.00),
             ('Bookmark Print', 2, 7.50)
-        `)
+        `).then(res.status(200).send())
     }
 }

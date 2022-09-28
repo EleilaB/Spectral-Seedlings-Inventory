@@ -16,10 +16,12 @@ const {
     addProduct,
     deleteCategory
 } = require('./controller.js');
+const {seed} = require('./seed.js');
 
 // ENDPOINTS
-app.get('/products', getProducts);
-app.get('/products', getCategories);
+app.post('/seed', seed)
+app.get('/products/:id', getProducts);
+app.get('/categories', getCategories);
 app.post('/new-category', addCategory);
 app.post('/new-product', addProduct);
 app.delete('/delete-category', deleteCategory);
