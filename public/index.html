@@ -10,17 +10,31 @@
     <div id="header-box">
         <h1 id="header">Spectral Seedlings Inventory</h1>
     </div>
-    <div id="product-box">
+    <div id="category-box">
         <select id="categories-list" size="0">
             <option value="Category..." selected>Category...</option>
         </select>
+        <div id="make-category-box">
+            <label for="delete-category">Remove Category</label>
+            <button id="delete-category">-</button>
+            <label for="category-name">New Category:</label>
+            <input id="category-name" type="text" placeholder="New Category">
+            <label for="new-category">Add Category</label>
+            <button id="new-category">+</button>
+        </div>
     </div>
-    <div id="add-new">
-        <label for="new-category">Add Category</label>
-        <button id="new-category">+</button>
-        <label for="new-product">Add Product</label>
-        <button id="new-product">+</button>
+    <div id="product-box">
+        <ul id="product-list">
+        </ul>
+        <div id="make-product-box">
+            <label for="product-name">New Product:</label>
+            <input id="product-name" type="text" placeholder="Product Name">
+            <label for="product-price">Price:</label>
+            <input id="product-price" type="text" placeholder="0.00">
+            <label for="new-product">Add Product</label>
+            <button id="new-product">+</button>
+        </div>
     </div>
 </body>
-<script src="/public/index.js"></script>
+<script src="/index.js"></script>
 </html>
