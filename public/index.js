@@ -5,7 +5,7 @@ const baseURL = /*`https://spectral-seedlings-inventory.herokuapp.com/` ||*/ `ht
 const categoryList = document.querySelector("#categories-list");
 let currentCategory = categoryList.value;
 const productList = document.querySelector("#product-list");
-const categoryName = document.querySelector("#category-name");
+let categoryName = document.querySelector("#category-name");
 const productName = document.querySelector("#product-name");
 const productPrice = document.querySelector("#product-price");
 const newCategoryBtn = document.querySelector("#new-category");
@@ -18,19 +18,16 @@ categoryOnChange = (e) => {
     showProducts(currentCategory)
 };
 
-// THESE AREN'T WORKING vvvv
 clearCategories = () => {
-    for(let i = 1; i < categoryList.length; i++){
-        categoryList.removeChild(document.querySelector(".category"))
-    }
+    let defaultCategory = document.createElement("option")
+    defaultCategory.value = "Categories..."
+    defaultCategory.textContent = "Categories..."
+    categoryList.replaceChildren(defaultCategory)
 };
 
 clearProducts = () => {
-    for(let i = 0; i < productList.length; i++){
-        productList.removeChild(document.querySelector(".product"))
-    }
+    productList.replaceChildren()
 };
-// THESE AREN'T WORKING ^^^^
 
 showCategories = (req, res) => {
     clearCategories()
@@ -45,6 +42,7 @@ showCategories = (req, res) => {
             categoryList.appendChild(newCategory)
         }
     })
+    currentCategory = categoryList.value
     showProducts(currentCategory)
 };
 
@@ -116,33 +114,41 @@ makeProduct = (req, res) => {
 };
 
 deleteCategory = (req, res) => {
-    if(productName.textContent === "" || " "){
+    if(currentCategory === "Categories..."){
         alert("Please select a Category to remove")
     }
     else {
-        const bodyObj = {
-            category: currentCategory
-        }
-        axios.delete(`${baseURL}delete-category`, bodyObj)
-        .then(res => {
-            alert(`${currentCategory} deleted`);
-            showCategories();
-        })
+        let confirmDelete = `This will delete the current Category and all Products in it.\nAre you sure?`
+        return Promise.resolve().then(() => {
+            if (confirm(confirmDelete) === true){
+                axios.delete(`${baseURL}delete-category/${currentCategory}`)
+                .then(res => {
+                    alert(`Category deleted`);
+                    clearCategories();
+                    showCategories();
+                })
+            }
+        });
+        
     }
 };
 
 deleteProduct = (id) => {
-    axios.delete(`${baseURL}delete-product/${id}`)
-    .then(res => {
-        showProducts(currentCategory);
-    })
+    let confirmDelete = "Are you sure you want to delete this product?"
+    if (confirm(confirmDelete) === true){
+        axios.delete(`${baseURL}delete-product/${id}`)
+        .then(res => {
+            alert("Product deleted")
+            showProducts(currentCategory);
+        })
+    }
 };
 
 // EVENT LISTENERS
 categoryList.addEventListener("change", categoryOnChange)
-// newCategoryBtn.addEventListener("click", makeCategory)
+newCategoryBtn.addEventListener("click", makeCategory)
 // newProductBtn.addEventListener("click", makeProduct)
-// deleteCategoryBtn.addEventListener("click", deleteCategory)
+deleteCategoryBtn.addEventListener("click", deleteCategory)
 
 
 // ONSTART

@@ -25,7 +25,7 @@ app.get('/products/:id', getProducts);
 app.get('/categories', getCategories);
 app.post('/new-category', addCategory);
 app.post('/new-product', addProduct);
-app.delete('/delete-category', deleteCategory);
+app.delete('/delete-category/:categoryID', deleteCategory);
 app.delete('/delete-product/:id', deleteProduct);
 
 const port = process.env.PORT || 4005;

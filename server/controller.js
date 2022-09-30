@@ -43,11 +43,11 @@ module.exports = {
         .catch(err => console.log(err))
     },
     deleteCategory: (req, res) => {
-        const {category} = req.body
-        const categoryID = sequelize.query(`SELECT category_id FROM categories WHERE name = ${category};`)
-        sequelize.query(`DELETE FROM products WHERE category_id = ${categoryID};`)
-        sequelize.query(`DELETE FROM categories WHERE category_id = ${categoryID};`)
-        .then(res.status(200).send())
+        const {categoryID} = req.params
+        sequelize.query(`
+        DELETE FROM products WHERE category_id = ${categoryID};
+        DELETE FROM categories WHERE category_id = ${categoryID};
+        `).then(res.status(200).send())
         .catch(err => console.log(err))
     },
     deleteProduct: (req, res) => {
