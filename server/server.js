@@ -14,7 +14,8 @@ const {
     getCategories,
     addCategory,
     addProduct,
-    deleteCategory
+    deleteCategory,
+    deleteProduct
 } = require('./controller.js');
 const {seed} = require('./seed.js');
 
@@ -25,6 +26,7 @@ app.get('/categories', getCategories);
 app.post('/new-category', addCategory);
 app.post('/new-product', addProduct);
 app.delete('/delete-category', deleteCategory);
+app.delete('/delete-product/:id', deleteProduct);
 
 const port = process.env.PORT || 4005;
 

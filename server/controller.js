@@ -30,7 +30,7 @@ module.exports = {
         sequelize.query(`
             INSERT INTO categories (name)
             VALUES (${name})
-        `).then(res.status(200))
+        `).then(res.status(200).send())
         .catch(err => console.log(err))
     },
     addProduct: (req, res) => {
@@ -39,7 +39,7 @@ module.exports = {
         sequelize.query(`
             INSERT INTO products (name, category_id, price)
             VALUES (${name}, ${categoryID}, ${price});
-        `).then(res.status(200))
+        `).then(res.status(200).send())
         .catch(err => console.log(err))
     },
     deleteCategory: (req, res) => {
@@ -47,7 +47,13 @@ module.exports = {
         const categoryID = sequelize.query(`SELECT category_id FROM categories WHERE name = ${category};`)
         sequelize.query(`DELETE FROM products WHERE category_id = ${categoryID};`)
         sequelize.query(`DELETE FROM categories WHERE category_id = ${categoryID};`)
-        .then(res.status(200))
+        .then(res.status(200).send())
+        .catch(err => console.log(err))
+    },
+    deleteProduct: (req, res) => {
+        const {id} = req.params
+        sequelize.query(`DELETE FROM products WHERE product_id = ${id};`)
+        .then(res.status(200).send())
         .catch(err => console.log(err))
     }
 }
