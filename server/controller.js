@@ -29,16 +29,15 @@ module.exports = {
         const {name} = req.body
         sequelize.query(`
             INSERT INTO categories (name)
-            VALUES (${name})
+            VALUES ('${name}');
         `).then(res.status(200).send())
         .catch(err => console.log(err))
     },
     addProduct: (req, res) => {
-        const {name, category, price} = req.body
-        const categoryID = sequelize.query(`SELECT category_id FROM categories WHERE name = ${category};`)
+        const {name, categoryID, price} = req.body
         sequelize.query(`
             INSERT INTO products (name, category_id, price)
-            VALUES (${name}, ${categoryID}, ${price});
+            VALUES ('${name}', ${categoryID}, ${price});
         `).then(res.status(200).send())
         .catch(err => console.log(err))
     },

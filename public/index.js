@@ -4,8 +4,9 @@ const baseURL = /*`https://spectral-seedlings-inventory.herokuapp.com/` ||*/ `ht
 // DOM VARIABLES
 const categoryList = document.querySelector("#categories-list");
 let currentCategory = categoryList.value;
+let currentCategoryName = categoryList.name;
 const productList = document.querySelector("#product-list");
-let categoryName = document.querySelector("#category-name");
+const categoryName = document.querySelector("#category-name");
 const productName = document.querySelector("#product-name");
 const productPrice = document.querySelector("#product-price");
 const newCategoryBtn = document.querySelector("#new-category");
@@ -15,6 +16,7 @@ const deleteCategoryBtn = document.querySelector("#delete-category");
 // FUNCTIONS
 categoryOnChange = (e) => {
     currentCategory = categoryList.value;
+    currentCategoryName = categoryList.name;
     showProducts(currentCategory)
 };
 
@@ -74,40 +76,43 @@ showProducts = (categoryID) => {
 };
 
 makeCategory = (req, res) => {
-        if(categoryName.textContent === "" || " "){
-            alert("Please give your new Category a name")
-        }
-        else {
+    if(categoryName.value === "" ){
+        alert("Please give your new Category a name")
+    }
+    else {
         let bodyObj = {
-            name: categoryName.textContent
+            name: categoryName.value
         }
         axios.post(`${baseURL}new-category`, bodyObj)
         .then(res => {
-            alert(`${categoryName.textContent} added to Categories`);
-            categoryName.textContent = '';
+            alert(`${categoryName.value} added to Categories`);
+            categoryName.value = '';
             showCategories();
         })
     }
 };
 
 makeProduct = (req, res) => {
-    if(productName.textContent === "" || " "){
+    if(currentCategory === "Categories..."){
+        alert("Please select a Category to add your new Product to")
+    }
+    else if(productName.value === "" ){
         alert("Please give your new Product a name")
     }
-    else if(productPrice.textContent === "" || " "){
+    else if(productPrice.value === "" ){
         alert("Please give your new Product a price")
     }
     else {
         let bodyObj = {
-            name: productName.textContent,
-            category: currentCategory,
-            price: productPrice.textContent
+            name: productName.value,
+            categoryID: currentCategory,
+            price: productPrice.value
         }
         axios.post(`${baseURL}new-product`, bodyObj)
         .then(res => {
-            alert(`${productName.textContent} added in the ${currentCategory} Category`);
-            productName.textContent = '';
-            productPrice.textContent = '';
+            alert(`${productName.value} added to Products`);
+            productName.value = '';
+            productPrice.value = '';
             showProducts(currentCategory);
         })
     }
@@ -134,11 +139,11 @@ deleteCategory = (req, res) => {
 };
 
 deleteProduct = (id) => {
-    let confirmDelete = "Are you sure you want to delete this product?"
+    let confirmDelete = `Are you sure you want to delete this Product?`
     if (confirm(confirmDelete) === true){
         axios.delete(`${baseURL}delete-product/${id}`)
         .then(res => {
-            alert("Product deleted")
+            alert(`Product deleted`)
             showProducts(currentCategory);
         })
     }
@@ -147,7 +152,7 @@ deleteProduct = (id) => {
 // EVENT LISTENERS
 categoryList.addEventListener("change", categoryOnChange)
 newCategoryBtn.addEventListener("click", makeCategory)
-// newProductBtn.addEventListener("click", makeProduct)
+newProductBtn.addEventListener("click", makeProduct)
 deleteCategoryBtn.addEventListener("click", deleteCategory)
 
 
