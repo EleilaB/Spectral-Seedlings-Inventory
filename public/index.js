@@ -55,7 +55,7 @@ makeProductCard = (product) => {
     productCard.innerHTML = `
         <p class="product-name">${product.name}</p>
         <p class="product-price">${product.price}</p>
-        <button class="delete-product" onclick="deleteProduct(${product.product_id})">delete</button>
+        <button class="delete-product" onclick="deleteProduct(${product.product_id})">-</button>
     `
     productList.appendChild(productCard)
 };

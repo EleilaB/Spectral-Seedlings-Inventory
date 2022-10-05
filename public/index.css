@@ -1,0 +1,76 @@
+html {
+    min-height: 100%;
+    background-color: #2A654D;
+    background-size: cover;
+}
+
+#header-box {
+    position: relative;
+    border-bottom-left-radius: 200px;
+    border-bottom-right-radius: 200px;
+    box-shadow: 0px 3px 2px #131313;
+    background-color: #54494B;
+    text-align: center;
+    font-size: 48px;
+    word-wrap: normal;
+    width: 35vw;
+    height: 25vh;
+    margin-left: 32.5vw;
+    margin-right: 32.5vw;
+    z-index: 3;
+}
+
+#header {
+    color: #FFA552;
+}
+
+#product-box {
+    display: flex;
+    flex-wrap: wrap;
+    border-top-left-radius: 1vw;
+    border-bottom-left-radius: 1vw;
+    background-color: #8AB0AB;
+    height: 50vh;
+    width: 50vw;
+    margin-top: 0vh;
+    margin-bottom: 25vh;
+    margin-left: 5vw;
+    margin-right: 35vw;
+    padding: 1vw;
+}
+
+#make-product-inputs {
+    display: inline-block;
+    flex-wrap: wrap;
+}
+
+#product-name, #product-price {
+    display: block;
+}
+
+#new-product {
+    display: inline;
+}
+
+#category-box {
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 1vw;
+    background-color: #8AB0AB;
+    width: 30vw;
+    height: 90vw;
+    margin-right: 5vw;
+    padding-top: 20vh;
+    padding-bottom: 20vh;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    z-index: 2;
+}
+
+#categories-list {
+    width: 80%;
+    height: fit-content;
+    margin-left: 10%;
+    margin-right: 10%;
+    background-color: #FFA552;
+}

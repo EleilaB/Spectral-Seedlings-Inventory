@@ -4,35 +4,41 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style-reset.css">
+    <link rel="stylesheet" href="./index.css">
     <title>Spectral Seedlings Inventory</title>
 </head>
 <body>
     <div id="header-box">
         <h1 id="header">Spectral Seedlings Inventory</h1>
     </div>
+    <div id="product-box">
+        <ul id="product-list">
+        </ul>
+        <div id="make-product-box">
+            <div id="make-product-inputs">
+                <label for="product-name">New Product:</label>
+                <input id="product-name" placeholder="Product Name">
+                <label for="product-price">Price:</label>
+                <input id="product-price" placeholder="0.00">
+            </div>
+            <div id="make-product-button">
+                <button id="new-product">+</button>
+                <label for="new-product">Add Product</label>
+            </div>
+        </div>
+    </div>
     <div id="category-box">
         <select id="categories-list" size="0">
             <option value="Categories...">Categories...</option>
         </select>
         <div id="make-category-box">
-            <label for="delete-category">Remove Category</label>
-            <button id="delete-category">-</button>
             <label for="category-name">New Category:</label>
             <input id="category-name" placeholder="New Category">
-            <label for="new-category">Add Category</label>
             <button id="new-category">+</button>
-        </div>
-    </div>
-    <div id="product-box">
-        <ul id="product-list">
-        </ul>
-        <div id="make-product-box">
-            <label for="product-name">New Product:</label>
-            <input id="product-name" placeholder="Product Name">
-            <label for="product-price">Price:</label>
-            <input id="product-price" placeholder="0.00">
-            <label for="new-product">Add Product</label>
-            <button id="new-product">+</button>
+            <label for="new-category">Add Category</label>
+            <button id="delete-category">-</button>
+            <label for="delete-category">Remove Category</label>
         </div>
     </div>
 </body>
