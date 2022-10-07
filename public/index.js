@@ -1,5 +1,5 @@
 // BASE URL
-const baseURL = /*`https://spectral-seedlings-inventory.herokuapp.com/` ||*/ `http://localhost:4005/`;
+const baseURL = `https://spectral-seedlings-inventory.herokuapp.com/` || `http://localhost:4005/`;
 
 // DOM VARIABLES
 const categoryList = document.querySelector("#categories-list");
@@ -12,9 +12,11 @@ const productPrice = document.querySelector("#product-price");
 const newCategoryBtn = document.querySelector("#new-category");
 const newProductBtn = document.querySelector("#new-product");
 const deleteCategoryBtn = document.querySelector("#delete-category");
+let colorSwitcher = false;
 
 // FUNCTIONS
 categoryOnChange = (e) => {
+    colorSwitcher = false;
     currentCategory = categoryList.value;
     currentCategoryName = categoryList.name;
     showProducts(currentCategory)
@@ -52,12 +54,18 @@ makeProductCard = (product) => {
     const productCard = document.createElement("li");
     productCard.value = `${product.name}`
     productCard.classList.add("product")
+    if(colorSwitcher === false){
+        productCard.classList.add("gold")
+    } else {
+        productCard.classList.add("orange")
+    }
     productCard.innerHTML = `
+        <button class="delete-product" onclick="deleteProduct(${product.product_id})">X</button>
         <p class="product-name">${product.name}</p>
         <p class="product-price">${product.price}</p>
-        <button class="delete-product" onclick="deleteProduct(${product.product_id})">-</button>
     `
     productList.appendChild(productCard)
+    colorSwitcher = !colorSwitcher
 };
 
 showProducts = (categoryID) => {
