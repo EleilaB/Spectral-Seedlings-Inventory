@@ -1,5 +1,5 @@
 // BASE URL
-const baseURL = `https://spectral-seedlings-inventory.herokuapp.com/` || `http://localhost:4005/`;
+const baseURL = `https://spectral-seedlings-inventory.herokuapp.com/`
 
 // DOM VARIABLES
 const categoryList = document.querySelector("#categories-list");
